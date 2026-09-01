@@ -1,24 +1,403 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, CalendarCheck, Compass, Quote, Sparkles, Users } from "lucide-react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/site/Reveal";
+import { SiteFooter } from "@/components/site/SiteFooter";
+import { SiteHeader } from "@/components/site/SiteHeader";
+import heroMandap from "@/assets/hero-mandap.jpg";
+import galleryTablescape from "@/assets/gallery-tablescape.jpg";
+import galleryHaldi from "@/assets/gallery-haldi.jpg";
+import galleryVenue from "@/assets/gallery-venue.jpg";
+import gallerySangeet from "@/assets/gallery-sangeet.jpg";
+import aboutStudio from "@/assets/about-studio.jpg";
+
+const TITLE = "Stepwise Events — Indian Wedding & Celebration Planners";
+const DESCRIPTION =
+  "Bengaluru-based planning and design studio for Indian weddings, sangeets and family celebrations. Full production, twelve events a year, one team throughout.";
+
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+    ],
+  }),
+  component: Home,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+const SERVICES = [
+  {
+    icon: Compass,
+    title: "Planning & logistics",
+    body: "Budget structure, vendor contracts, run-of-show and on-ground coordination for every function.",
+  },
+  {
+    icon: Sparkles,
+    title: "Design & styling",
+    body: "Palette, florals, stage and tablescape design drawn up as full elevations before anything is booked.",
+  },
+  {
+    icon: Users,
+    title: "Guest experience",
+    body: "Travel, stays, hospitality desks and welcome gifting handled for outstation and overseas families.",
+  },
+  {
+    icon: CalendarCheck,
+    title: "Production",
+    body: "Fabrication, lighting, sound and technical rehearsals supervised by our own production leads.",
+  },
+];
+
+const CELEBRATIONS = [
+  {
+    name: "Weddings",
+    detail: "Three to five functions, 150–800 guests, single or multi-venue.",
+  },
+  { name: "Sangeet & Mehndi", detail: "Performance-led evenings with staging and choreography support." },
+  { name: "Receptions", detail: "Formal seated dinners and large-format cocktail receptions." },
+  { name: "Engagements", detail: "Intimate ceremonies for close family, often at home." },
+  { name: "Milestones", detail: "Anniversaries, naming ceremonies and landmark birthdays." },
+  { name: "Destination", detail: "Rajasthan, Goa, Kerala and select venues in Southeast Asia." },
+];
+
+const PROCESS = [
+  {
+    step: "01",
+    title: "Enquiry & date hold",
+    body: "Share your dates and scale. We confirm availability within two working days.",
+  },
+  {
+    step: "02",
+    title: "Design direction",
+    body: "A written brief, palette and layout studies for each function before costs are locked.",
+  },
+  {
+    step: "03",
+    title: "Vendor curation",
+    body: "Shortlists with transparent quotes. You approve every contract we place.",
+  },
+  {
+    step: "04",
+    title: "Production week",
+    body: "Setup supervision, rehearsals and a printed run-of-show for both families.",
+  },
+];
+
+const TESTIMONIALS = [
+  {
+    quote:
+      "They ran a 400-guest wedding across two venues without a single question reaching us. The design studies were accurate down to the linen.",
+    name: "Ananya & Vikram",
+    place: "Bengaluru, 2025",
+  },
+  {
+    quote:
+      "Costs stayed within the band we agreed in month one. Every vendor quote came to us before it was signed.",
+    name: "The Malhotra family",
+    place: "New Delhi, 2025",
+  },
+  {
+    quote:
+      "Our sangeet had eleven performances and forty outstation guests. Both were handled better than we planned ourselves.",
+    name: "Meera & Arjun",
+    place: "Chennai, 2024",
+  },
+];
+
+function Home() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen">
+      <SiteHeader />
+      <main>
+        {/* Hero */}
+        <section className="relative isolate overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24 lg:pt-44">
+          <div className="shell grid items-center gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
+            <Reveal>
+              <p className="eyebrow">Bengaluru · Since 2014</p>
+              <h1 className="mt-5 text-[2.5rem] leading-[1.05] sm:text-5xl lg:text-[4.25rem]">
+                Indian weddings, planned in deliberate steps.
+              </h1>
+              <p className="measure mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
+                We take on twelve celebrations a year so one team stays with you from the first
+                budget conversation to the last guest departure.
+              </p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <Button asChild size="lg" variant="accent">
+                  <Link to="/booking">
+                    Request a date <ArrowRight className="size-4" />
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <a href="#gallery">See recent work</a>
+                </Button>
+              </div>
+              <dl className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-border pt-7">
+                {[
+                  ["180+", "Celebrations"],
+                  ["12", "Events a year"],
+                  ["9", "In-house leads"],
+                ].map(([value, label]) => (
+                  <div key={label}>
+                    <dt className="font-display text-2xl sm:text-3xl">{value}</dt>
+                    <dd className="mt-1 text-xs tracking-wide text-muted-foreground uppercase">
+                      {label}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
+
+            <Reveal delay={120} className="media-frame rounded-lg">
+              <img
+                src={heroMandap}
+                width={1600}
+                height={1104}
+                alt="Wedding mandap draped in ivory and emerald fabric with white floral garlands at dusk, guests seated facing the ceremony"
+                className="aspect-4/3 lg:aspect-3/4 xl:aspect-4/5"
+              />
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Services */}
+        <section id="services" className="section-y scroll-mt-20 border-t border-border">
+          <div className="shell">
+            <Reveal className="measure rule-accent">
+              <p className="eyebrow">What we do</p>
+              <h2 className="mt-4 text-3xl sm:text-4xl">
+                Four disciplines, handled by the same team
+              </h2>
+              <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+                Nothing is subcontracted to a coordinator you haven't met. The people who design
+                your event are on site running it.
+              </p>
+            </Reveal>
+
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
+              {SERVICES.map((service, i) => (
+                <Reveal
+                  key={service.title}
+                  delay={i * 70}
+                  className="hover-lift rounded-lg border border-border bg-card p-6 lg:p-7"
+                >
+                  <service.icon className="size-6 text-accent" aria-hidden="true" />
+                  <h3 className="mt-5 text-xl">{service.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {service.body}
+                  </p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Celebrations */}
+        <section id="celebrations" className="section-y scroll-mt-20 bg-secondary/45">
+          <div className="shell grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
+            <Reveal className="rule-accent">
+              <p className="eyebrow">Celebrations</p>
+              <h2 className="mt-4 text-3xl sm:text-4xl">Events we take on</h2>
+              <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+                Tell us the functions you're planning and we'll say honestly whether we're the right
+                studio for them.
+              </p>
+            </Reveal>
+            <Reveal delay={100}>
+              <ul className="grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2">
+                {CELEBRATIONS.map((item) => (
+                  <li
+                    key={item.name}
+                    className="bg-card p-6 transition-colors duration-[--dur-base] ease-[--ease-out] hover:bg-background"
+                  >
+                    <h3 className="text-lg">{item.name}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      {item.detail}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Gallery */}
+        <section id="gallery" className="section-y scroll-mt-20">
+          <div className="shell">
+            <Reveal className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+              <div className="measure rule-accent">
+                <p className="eyebrow">Gallery</p>
+                <h2 className="mt-4 text-3xl sm:text-4xl">Recent celebrations</h2>
+              </div>
+              <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
+                A short selection from weddings and functions produced over the last two seasons.
+              </p>
+            </Reveal>
+
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:mt-16 lg:grid-cols-12 lg:gap-5">
+              <Reveal className="media-frame rounded-lg lg:col-span-7">
+                <img
+                  src={galleryVenue}
+                  loading="lazy"
+                  width={1408}
+                  height={1008}
+                  alt="Heritage sandstone palace courtyard set for a wedding reception with floral canopies and string lights at golden hour"
+                  className="aspect-4/3"
+                />
+              </Reveal>
+              <Reveal delay={80} className="media-frame rounded-lg lg:col-span-5">
+                <img
+                  src={gallerySangeet}
+                  loading="lazy"
+                  width={1200}
+                  height={1504}
+                  alt="Guests dancing at a sangeet beneath emerald drapes and warm festoon lighting"
+                  className="aspect-3/4 sm:aspect-4/3 lg:aspect-4/5"
+                />
+              </Reveal>
+              <Reveal delay={60} className="media-frame rounded-lg lg:col-span-5">
+                <img
+                  src={galleryTablescape}
+                  loading="lazy"
+                  width={912}
+                  height={1200}
+                  alt="Reception place setting with terracotta charger, brass candlesticks and jasmine and rose centrepieces"
+                  className="aspect-3/4 sm:aspect-square lg:aspect-4/5"
+                />
+              </Reveal>
+              <Reveal delay={120} className="media-frame rounded-lg lg:col-span-7">
+                <img
+                  src={galleryHaldi}
+                  loading="lazy"
+                  width={1408}
+                  height={912}
+                  alt="Family applying haldi to a smiling bride in a courtyard hung with marigold garlands"
+                  className="aspect-4/3"
+                />
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* Process */}
+        <section id="process" className="section-y scroll-mt-20 border-t border-border">
+          <div className="shell">
+            <Reveal className="measure rule-accent">
+              <p className="eyebrow">Process</p>
+              <h2 className="mt-4 text-3xl sm:text-4xl">How a booking moves forward</h2>
+            </Reveal>
+            <ol className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border lg:mt-16 lg:grid-cols-4">
+              {PROCESS.map((item, i) => (
+                <Reveal
+                  as="li"
+                  key={item.step}
+                  delay={i * 70}
+                  className="bg-card p-6 lg:p-7"
+                >
+                  <span className="font-display text-3xl text-accent">{item.step}</span>
+                  <h3 className="mt-4 text-lg">{item.title}</h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+                    {item.body}
+                  </p>
+                </Reveal>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        {/* Studio */}
+        <section id="studio" className="section-y scroll-mt-20 bg-secondary/45">
+          <div className="shell grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            <Reveal className="media-frame order-last rounded-lg lg:order-first">
+              <img
+                src={aboutStudio}
+                loading="lazy"
+                width={1312}
+                height={1008}
+                alt="Two Stepwise Events planners reviewing a floor plan with fabric swatches and brass details on a studio table"
+                className="aspect-4/3"
+              />
+            </Reveal>
+            <Reveal delay={100} className="rule-accent">
+              <p className="eyebrow">The studio</p>
+              <h2 className="mt-4 text-3xl sm:text-4xl">
+                A small team, deliberately kept that way
+              </h2>
+              <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                <p>
+                  Stepwise Events was started in 2014 by Nandita Shenoy and Farhan Qureshi after a
+                  decade between hotel banqueting and production design.
+                </p>
+                <p>
+                  We work with a fixed roster of florists, fabricators and caterers we've used for
+                  years, which is how we can quote accurately and hold to it.
+                </p>
+                <p>
+                  Every enquiry is answered by one of the two founders, not a sales desk.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="section-y">
+          <div className="shell">
+            <Reveal className="measure rule-accent">
+              <p className="eyebrow">Clients</p>
+              <h2 className="mt-4 text-3xl sm:text-4xl">In their words</h2>
+            </Reveal>
+            <div className="mt-12 grid gap-5 md:grid-cols-3 lg:mt-16">
+              {TESTIMONIALS.map((t, i) => (
+                <Reveal
+                  key={t.name}
+                  delay={i * 70}
+                  className="hover-lift flex flex-col rounded-lg border border-border bg-card p-6 lg:p-7"
+                >
+                  <Quote className="size-5 text-accent" aria-hidden="true" />
+                  <blockquote className="mt-5 flex-1 text-sm leading-relaxed sm:text-[0.9375rem]">
+                    {t.quote}
+                  </blockquote>
+                  <footer className="mt-6 border-t border-border pt-4">
+                    <p className="text-sm font-semibold">{t.name}</p>
+                    <p className="mt-0.5 text-xs tracking-wide text-muted-foreground uppercase">
+                      {t.place}
+                    </p>
+                  </footer>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Booking CTA */}
+        <section className="pb-20 lg:pb-28">
+          <div className="shell">
+            <Reveal className="rounded-lg bg-primary px-6 py-14 text-center text-primary-foreground sm:px-10 lg:px-16 lg:py-20">
+              <p className="text-[0.6875rem] font-semibold tracking-[0.22em] text-primary-foreground/70 uppercase">
+                Dates for 2026–27
+              </p>
+              <h2 className="mx-auto mt-5 max-w-2xl text-3xl sm:text-4xl lg:text-5xl">
+                Check whether your dates are still open
+              </h2>
+              <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-primary-foreground/75 sm:text-base">
+                Send us your functions and guest count. You'll hear from Nandita or Farhan within
+                two working days.
+              </p>
+              <div className="mt-9 flex justify-center">
+                <Button asChild size="lg" variant="accent">
+                  <Link to="/booking">
+                    Request a date <ArrowRight className="size-4" />
+                  </Link>
+                </Button>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
     </div>
   );
 }
