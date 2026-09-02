@@ -116,13 +116,17 @@ function Home() {
         <section className="relative isolate overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24 lg:pt-44">
           <div className="shell grid items-center gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
             <Reveal>
-              <p className="eyebrow">Bengaluru · Since 2014</p>
-              <h1 className="mt-5 text-[2.5rem] leading-[1.05] sm:text-5xl lg:text-[4.25rem]">
-                Indian weddings, planned in deliberate steps.
+              <p className="eyebrow">Weddings · Events · Celebrations</p>
+              <h1 className="mt-6 text-[clamp(2.6rem,11vw,3.4rem)] sm:text-[clamp(3.2rem,7.4vw,4.6rem)] lg:text-[clamp(3.6rem,5.4vw,5.4rem)]">
+                Indian weddings,
+                <br />
+                planned in
+                <br />
+                deliberate steps.
               </h1>
-              <p className="measure mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
-                We take on twelve celebrations a year so one team stays with you from the first
-                budget conversation to the last guest departure.
+              <p className="measure mt-7 text-base leading-relaxed text-muted-foreground sm:text-lg">
+                A planning and design studio for weddings, sangeets and family functions — one
+                team with you from the first budget conversation to the last guest departure.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg" variant="accent">
@@ -134,21 +138,22 @@ function Home() {
                   <a href="#gallery">See recent work</a>
                 </Button>
               </div>
-              <dl className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-border pt-7">
+              <dl className="mt-12 grid max-w-lg gap-6 border-t border-border pt-7 sm:grid-cols-3">
                 {[
-                  ["180+", "Celebrations"],
-                  ["12", "Events a year"],
-                  ["9", "In-house leads"],
+                  ["Planning", "Budgets, vendors, run-of-show"],
+                  ["Design", "Palette, florals, staging"],
+                  ["Production", "Setup, lighting, rehearsals"],
                 ].map(([value, label]) => (
                   <div key={label}>
-                    <dt className="font-display text-2xl sm:text-3xl">{value}</dt>
-                    <dd className="mt-1 text-xs tracking-wide text-muted-foreground uppercase">
+                    <dt className="font-display text-xl sm:text-2xl">{value}</dt>
+                    <dd className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
                       {label}
                     </dd>
                   </div>
                 ))}
               </dl>
             </Reveal>
+
 
             <Reveal delay={120} className="media-frame rounded-lg">
               <img
