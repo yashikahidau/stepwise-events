@@ -140,7 +140,7 @@ function BookingPage() {
                 <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
                   Your reference is{" "}
                   <span className="font-semibold text-foreground">{reference}</span> for{" "}
-                  {date ? format(date, "d MMMM yyyy") : "your selected date"}. Nandita or Farhan
+                  {date ? format(date, "d MMMM yyyy") : "your selected date"}. A planner
                   will confirm availability within two working days.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">

@@ -14,7 +14,7 @@ import aboutStudio from "@/assets/about-studio.jpg";
 
 const TITLE = "Stepwise Events — Indian Wedding & Celebration Planners";
 const DESCRIPTION =
-  "Bengaluru-based planning and design studio for Indian weddings, sangeets and family celebrations. Full production, twelve events a year, one team throughout.";
+  "Planning and design studio for Indian weddings, sangeets and family celebrations. Full production, one team from first brief to final guest departure.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -116,13 +116,17 @@ function Home() {
         <section className="relative isolate overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24 lg:pt-44">
           <div className="shell grid items-center gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
             <Reveal>
-              <p className="eyebrow">Bengaluru · Since 2014</p>
-              <h1 className="mt-5 text-[2.5rem] leading-[1.05] sm:text-5xl lg:text-[4.25rem]">
-                Indian weddings, planned in deliberate steps.
+              <p className="eyebrow">Weddings · Events · Celebrations</p>
+              <h1 className="mt-6 text-[clamp(2.05rem,8.6vw,3.4rem)] sm:text-[clamp(3.2rem,7.4vw,4.6rem)] lg:text-[clamp(3.6rem,5.4vw,5.4rem)]">
+                Indian weddings,
+                <br />
+                planned in
+                <br />
+                deliberate steps.
               </h1>
-              <p className="measure mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
-                We take on twelve celebrations a year so one team stays with you from the first
-                budget conversation to the last guest departure.
+              <p className="measure mt-7 text-base leading-relaxed text-muted-foreground sm:text-lg">
+                A planning and design studio for weddings, sangeets and family functions — one
+                team with you from the first budget conversation to the last guest departure.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg" variant="accent">
@@ -134,21 +138,22 @@ function Home() {
                   <a href="#gallery">See recent work</a>
                 </Button>
               </div>
-              <dl className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-border pt-7">
+              <dl className="mt-12 grid max-w-lg gap-6 border-t border-border pt-7 sm:grid-cols-3">
                 {[
-                  ["180+", "Celebrations"],
-                  ["12", "Events a year"],
-                  ["9", "In-house leads"],
+                  ["Planning", "Budgets, vendors, run-of-show"],
+                  ["Design", "Palette, florals, staging"],
+                  ["Production", "Setup, lighting, rehearsals"],
                 ].map(([value, label]) => (
                   <div key={label}>
-                    <dt className="font-display text-2xl sm:text-3xl">{value}</dt>
-                    <dd className="mt-1 text-xs tracking-wide text-muted-foreground uppercase">
+                    <dt className="font-display text-xl sm:text-2xl">{value}</dt>
+                    <dd className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
                       {label}
                     </dd>
                   </div>
                 ))}
               </dl>
             </Reveal>
+
 
             <Reveal delay={120} className="media-frame rounded-lg">
               <img
@@ -327,16 +332,15 @@ function Home() {
               </h2>
               <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
                 <p>
-                  Stepwise Events was started in 2014 by Nandita Shenoy and Farhan Qureshi after a
-                  decade between hotel banqueting and production design.
+                  Stepwise Events is a planning and design studio built around a small core team,
+                  with backgrounds in banqueting and production design.
                 </p>
                 <p>
-                  We work with a fixed roster of florists, fabricators and caterers we've used for
-                  years, which is how we can quote accurately and hold to it.
+                  We work with a fixed roster of florists, fabricators and caterers, which is how
+                  we can quote accurately and hold to it.
                 </p>
-                <p>
-                  Every enquiry is answered by one of the two founders, not a sales desk.
-                </p>
+                <p>Every enquiry is answered by a planner, not a sales desk.</p>
+
               </div>
             </Reveal>
           </div>
@@ -383,8 +387,8 @@ function Home() {
                 Check whether your dates are still open
               </h2>
               <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-primary-foreground/75 sm:text-base">
-                Send us your functions and guest count. You'll hear from Nandita or Farhan within
-                two working days.
+                Send us your functions and guest count. You'll hear back from a planner within two
+                working days.
               </p>
               <div className="mt-9 flex justify-center">
                 <Button asChild size="lg" variant="accent">
