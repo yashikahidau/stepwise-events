@@ -38,7 +38,8 @@ export const Route = createFileRoute("/booking")({
 });
 
 
-type Errors = Partial<Record<"date" | "name" | "email" | "phone" | "city" | "guests", string>>;
+type ErrorKey = "date" | "name" | "email" | "phone" | "city" | "guests";
+type Errors = { [K in ErrorKey]?: string | undefined };
 
 function BookingPage() {
   const unavailable = useMemo(() => getUnavailableDates().map((d) => new Date(`${d}T00:00:00`)), []);
@@ -390,10 +391,10 @@ function Field({
   label: string;
   value: string;
   onChange: (value: string) => void;
-  error?: string;
-  type?: string;
-  placeholder?: string;
-  inputMode?: "numeric" | "text" | "tel" | "email";
+  error?: string | undefined;
+  type?: string | undefined;
+  placeholder?: string | undefined;
+  inputMode?: "numeric" | "text" | "tel" | "email" | undefined;
 }) {
   return (
     <div>
