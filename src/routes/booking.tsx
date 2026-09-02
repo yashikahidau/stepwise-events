@@ -34,8 +34,9 @@ export const Route = createFileRoute("/booking")({
       { property: "og:description", content: DESCRIPTION },
     ],
   }),
-  component: BookingPage;
+  component: BookingPage,
 });
+
 
 type Errors = Partial<Record<"date" | "name" | "email" | "phone" | "city" | "guests", string>>;
 
