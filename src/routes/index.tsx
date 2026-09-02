@@ -332,16 +332,15 @@ function Home() {
               </h2>
               <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
                 <p>
-                  Stepwise Events was started in 2014 by Nandita Shenoy and Farhan Qureshi after a
-                  decade between hotel banqueting and production design.
+                  Stepwise Events is a planning and design studio built around a small core team,
+                  with backgrounds in banqueting and production design.
                 </p>
                 <p>
-                  We work with a fixed roster of florists, fabricators and caterers we've used for
-                  years, which is how we can quote accurately and hold to it.
+                  We work with a fixed roster of florists, fabricators and caterers, which is how
+                  we can quote accurately and hold to it.
                 </p>
-                <p>
-                  Every enquiry is answered by one of the two founders, not a sales desk.
-                </p>
+                <p>Every enquiry is answered by a planner, not a sales desk.</p>
+
               </div>
             </Reveal>
           </div>
