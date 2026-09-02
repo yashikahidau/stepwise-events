@@ -117,7 +117,7 @@ function Home() {
           <div className="shell grid items-center gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
             <Reveal>
               <p className="eyebrow">Weddings · Events · Celebrations</p>
-              <h1 className="mt-6 text-[clamp(2.05rem,8.6vw,3.4rem)] sm:text-[clamp(3.2rem,7.4vw,4.6rem)] lg:text-[clamp(3.6rem,5.4vw,5.4rem)]">
+              <h1 className="mt-6 text-[clamp(1.95rem,7.6vw,2.9rem)] sm:text-[clamp(2.6rem,5.8vw,3.6rem)] lg:text-[clamp(3rem,4.1vw,4.35rem)]">
                 Indian weddings,
                 <br />
                 planned in
