@@ -23,7 +23,7 @@ export interface Booking {
   eventDate: string; // ISO yyyy-mm-dd
   guests: number;
   budget: string;
-  notes?: string;
+  notes?: string | undefined;
   status: BookingStatus;
   submittedAt: string; // ISO
 }
@@ -136,7 +136,7 @@ export interface BookingDraft {
   eventDate: string;
   guests: number;
   budget: string;
-  notes?: string;
+  notes?: string | undefined;
 }
 
 export async function createBooking(draft: BookingDraft): Promise<Booking> {
