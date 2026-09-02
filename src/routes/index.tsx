@@ -14,7 +14,7 @@ import aboutStudio from "@/assets/about-studio.jpg";
 
 const TITLE = "Stepwise Events — Indian Wedding & Celebration Planners";
 const DESCRIPTION =
-  "Bengaluru-based planning and design studio for Indian weddings, sangeets and family celebrations. Full production, twelve events a year, one team throughout.";
+  "Planning and design studio for Indian weddings, sangeets and family celebrations. Full production, one team from first brief to final guest departure.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -387,8 +387,8 @@ function Home() {
                 Check whether your dates are still open
               </h2>
               <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-primary-foreground/75 sm:text-base">
-                Send us your functions and guest count. You'll hear from Nandita or Farhan within
-                two working days.
+                Send us your functions and guest count. You'll hear back from a planner within two
+                working days.
               </p>
               <div className="mt-9 flex justify-center">
                 <Button asChild size="lg" variant="accent">
