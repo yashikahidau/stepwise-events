@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
-import heroMandap from "@/assets/hero-mandap.jpg";
+import heroVenue from "@/assets/hero-venue.png.asset.json";
 import galleryTablescape from "@/assets/gallery-tablescape.jpg";
 import galleryHaldi from "@/assets/gallery-haldi.jpg";
 import galleryVenue from "@/assets/gallery-venue.jpg";
@@ -157,10 +157,10 @@ function Home() {
 
             <Reveal delay={120} className="media-frame rounded-lg">
               <img
-                src={heroMandap}
-                width={1600}
-                height={1104}
-                alt="Wedding mandap draped in ivory and emerald fabric with white floral garlands at dusk, guests seated facing the ceremony"
+                src={heroVenue.url}
+                width={1536}
+                height={1024}
+                alt="Candlelit outdoor wedding reception venue set with florals and warm lighting"
                 className="aspect-4/3 lg:aspect-3/4 xl:aspect-4/5"
               />
             </Reveal>
