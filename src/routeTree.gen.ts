@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BookingRouteImport } from './routes/booking'
+import { Route as ApiPublicProvisionAdminRouteImport } from './routes/api/public/provision-admin'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const BookingRoute = BookingRouteImport.update({
   path: '/booking',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicProvisionAdminRoute = ApiPublicProvisionAdminRouteImport.update({
+  id: '/api/public/provision-admin',
+  path: '/api/public/provision-admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/booking': typeof BookingRoute
+  '/api/public/provision-admin': typeof ApiPublicProvisionAdminRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/booking': typeof BookingRoute
+  '/api/public/provision-admin': typeof ApiPublicProvisionAdminRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/booking': typeof BookingRoute
+  '/api/public/provision-admin': typeof ApiPublicProvisionAdminRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/booking'
+  fullPaths: '/' | '/booking' | '/api/public/provision-admin'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/booking'
-  id: '__root__' | '/' | '/booking'
+  to: '/' | '/booking' | '/api/public/provision-admin'
+  id: '__root__' | '/' | '/booking' | '/api/public/provision-admin'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BookingRoute: typeof BookingRoute
+  ApiPublicProvisionAdminRoute: typeof ApiPublicProvisionAdminRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BookingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/provision-admin': {
+      id: '/api/public/provision-admin'
+      path: '/api/public/provision-admin'
+      fullPath: '/api/public/provision-admin'
+      preLoaderRoute: typeof ApiPublicProvisionAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BookingRoute: BookingRoute,
+  ApiPublicProvisionAdminRoute: ApiPublicProvisionAdminRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
