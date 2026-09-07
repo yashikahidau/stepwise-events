@@ -176,7 +176,15 @@ function BookingPage() {
                       setStatus("idle");
                       setReference(null);
                       setDate(undefined);
-                      setForm({ name: "", email: "", phone: "", city: "", guests: "", notes: "" });
+                      setForm({
+                        name: "",
+                        partner: "",
+                        email: "",
+                        phone: "",
+                        venue: "",
+                        guests: "",
+                        notes: "",
+                      });
                     }}
                   >
                     Submit another date
@@ -284,13 +292,34 @@ function BookingPage() {
                         />
 
                         <div>
+                          <Label htmlFor="preferredTime" className="text-xs tracking-wide uppercase">
+                            Preferred time
+                          </Label>
+                          <select
+                            id="preferredTime"
+                            value={preferredTime}
+                            onChange={(e) => setPreferredTime(e.target.value as PreferredTime)}
+                            className="mt-2.5 h-11 w-full rounded-md border border-input bg-background px-3 text-sm transition-colors duration-[--dur-fast] ease-[--ease-out] hover:border-accent focus-visible:border-accent"
+                          >
+                            {PREFERRED_TIMES.map((time) => (
+                              <option key={time} value={time}>
+                                {time}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+
+
+                        <div>
                           <Label htmlFor="budget" className="text-xs tracking-wide uppercase">
                             Budget band
                           </Label>
                           <select
                             id="budget"
                             value={budget}
-                            onChange={(e) => setBudget(e.target.value)}
+                            onChange={(e) =>
+                              setBudget(e.target.value as (typeof BUDGET_BANDS)[number])
+                            }
                             className="mt-2.5 h-11 w-full rounded-md border border-input bg-background px-3 text-sm transition-colors duration-[--dur-fast] ease-[--ease-out] hover:border-accent focus-visible:border-accent"
                           >
                             {BUDGET_BANDS.map((band) => (
@@ -334,13 +363,22 @@ function BookingPage() {
                           onChange={set("name")}
                         />
                         <Field
-                          id="city"
-                          label="City of celebration"
-                          error={errors.city}
-                          placeholder="Bengaluru"
-                          value={form.city}
-                          onChange={set("city")}
+                          id="partner"
+                          label="Partner name (optional)"
+                          error={errors.partner}
+                          placeholder="Kabir Malhotra"
+                          value={form.partner}
+                          onChange={set("partner")}
                         />
+                        <Field
+                          id="venue"
+                          label="Venue or location"
+                          error={errors.venue}
+                          placeholder="Bengaluru — venue to be confirmed"
+                          value={form.venue}
+                          onChange={set("venue")}
+                        />
+
                         <Field
                           id="email"
                           label="Email"
