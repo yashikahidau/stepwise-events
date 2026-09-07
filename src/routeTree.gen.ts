@@ -13,7 +13,9 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BookingRouteImport } from './routes/booking'
 import { Route as AdminShellRouteImport } from './routes/admin/_shell'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
+import { Route as AdminShellIndexRouteImport } from './routes/admin/_shell/index'
 import { Route as ApiPublicProvisionAdminRouteImport } from './routes/api/public/provision-admin'
+import { Route as AdminShellRequestsBookingIdRouteImport } from './routes/admin/_shell/requests.$bookingId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -35,41 +37,68 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminShellIndexRoute = AdminShellIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminShellRoute,
+} as any)
 const ApiPublicProvisionAdminRoute = ApiPublicProvisionAdminRouteImport.update({
   id: '/api/public/provision-admin',
   path: '/api/public/provision-admin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminShellRequestsBookingIdRoute =
+  AdminShellRequestsBookingIdRouteImport.update({
+    id: '/requests/$bookingId',
+    path: '/requests/$bookingId',
+    getParentRoute: () => AdminShellRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/booking': typeof BookingRoute
-  '/admin': typeof AdminShellRoute
+  '/admin': typeof AdminShellRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/api/public/provision-admin': typeof ApiPublicProvisionAdminRoute
+  '/admin/': typeof AdminShellIndexRoute
+  '/admin/requests/$bookingId': typeof AdminShellRequestsBookingIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/booking': typeof BookingRoute
-  '/admin': typeof AdminShellRoute
   '/admin/login': typeof AdminLoginRoute
   '/api/public/provision-admin': typeof ApiPublicProvisionAdminRoute
+  '/admin': typeof AdminShellIndexRoute
+  '/admin/requests/$bookingId': typeof AdminShellRequestsBookingIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/booking': typeof BookingRoute
-  '/admin/_shell': typeof AdminShellRoute
+  '/admin/_shell': typeof AdminShellRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/api/public/provision-admin': typeof ApiPublicProvisionAdminRoute
+  '/admin/_shell/': typeof AdminShellIndexRoute
+  '/admin/_shell/requests/$bookingId': typeof AdminShellRequestsBookingIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/booking' | '/admin' | '/admin/login' | '/api/public/provision-admin'
+    | '/'
+    | '/booking'
+    | '/admin'
+    | '/admin/login'
+    | '/api/public/provision-admin'
+    | '/admin/'
+    | '/admin/requests/$bookingId'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/booking' | '/admin' | '/admin/login' | '/api/public/provision-admin'
+    | '/'
+    | '/booking'
+    | '/admin/login'
+    | '/api/public/provision-admin'
+    | '/admin'
+    | '/admin/requests/$bookingId'
   id:
     | '__root__'
     | '/'
@@ -77,12 +106,14 @@ export interface FileRouteTypes {
     | '/admin/_shell'
     | '/admin/login'
     | '/api/public/provision-admin'
+    | '/admin/_shell/'
+    | '/admin/_shell/requests/$bookingId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BookingRoute: typeof BookingRoute
-  AdminShellRoute: typeof AdminShellRoute
+  AdminShellRoute: typeof AdminShellRouteWithChildren
   AdminLoginRoute: typeof AdminLoginRoute
   ApiPublicProvisionAdminRoute: typeof ApiPublicProvisionAdminRoute
 }
@@ -117,6 +148,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/_shell/': {
+      id: '/admin/_shell/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminShellIndexRouteImport
+      parentRoute: typeof AdminShellRoute
+    }
     '/api/public/provision-admin': {
       id: '/api/public/provision-admin'
       path: '/api/public/provision-admin'
@@ -124,13 +162,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicProvisionAdminRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/_shell/requests/$bookingId': {
+      id: '/admin/_shell/requests/$bookingId'
+      path: '/requests/$bookingId'
+      fullPath: '/admin/requests/$bookingId'
+      preLoaderRoute: typeof AdminShellRequestsBookingIdRouteImport
+      parentRoute: typeof AdminShellRoute
+    }
   }
 }
+
+interface AdminShellRouteChildren {
+  AdminShellIndexRoute: typeof AdminShellIndexRoute
+  AdminShellRequestsBookingIdRoute: typeof AdminShellRequestsBookingIdRoute
+}
+
+const AdminShellRouteChildren: AdminShellRouteChildren = {
+  AdminShellIndexRoute: AdminShellIndexRoute,
+  AdminShellRequestsBookingIdRoute: AdminShellRequestsBookingIdRoute,
+}
+
+const AdminShellRouteWithChildren = AdminShellRoute._addFileChildren(
+  AdminShellRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BookingRoute: BookingRoute,
-  AdminShellRoute: AdminShellRoute,
+  AdminShellRoute: AdminShellRouteWithChildren,
   AdminLoginRoute: AdminLoginRoute,
   ApiPublicProvisionAdminRoute: ApiPublicProvisionAdminRoute,
 }

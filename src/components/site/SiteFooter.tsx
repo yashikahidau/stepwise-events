@@ -31,11 +31,6 @@ export function SiteFooter() {
                 Request a date
               </Link>
             </li>
-            <li>
-              <Link to="/admin" className="nav-link inline-block">
-                Studio dashboard
-              </Link>
-            </li>
           </ul>
         </div>
 
