@@ -42,11 +42,21 @@ export const Route = createFileRoute("/booking")({
 });
 
 
-type ErrorKey = "date" | "name" | "email" | "phone" | "city" | "guests";
+type ErrorKey = "date" | "name" | "partner" | "email" | "phone" | "venue" | "guests";
 type Errors = { [K in ErrorKey]?: string | undefined };
 
 function BookingPage() {
-  const unavailable = useMemo(() => getUnavailableDates().map((d) => new Date(`${d}T00:00:00`)), []);
+  const fetchUnavailable = useServerFn(listUnavailableDates);
+  const submitRequest = useServerFn(submitBookingRequest);
+
+  const unavailableQuery = useQuery({
+    queryKey: ["unavailable-dates"],
+    queryFn: () => fetchUnavailable(),
+  });
+  const unavailable = useMemo(
+    () => (unavailableQuery.data ?? []).map((d) => new Date(`${d}T00:00:00`)),
+    [unavailableQuery.data],
+  );
   const today = useMemo(() => {
     const d = new Date();
     d.setHours(0, 0, 0, 0);
@@ -55,12 +65,14 @@ function BookingPage() {
 
   const [date, setDate] = useState<Date | undefined>();
   const [eventType, setEventType] = useState<EventType>("Wedding");
-  const [budget, setBudget] = useState<string>(BUDGET_BANDS[1]);
+  const [preferredTime, setPreferredTime] = useState<PreferredTime>("Evening");
+  const [budget, setBudget] = useState<(typeof BUDGET_BANDS)[number]>(BUDGET_BANDS[1]);
   const [form, setForm] = useState({
     name: "",
+    partner: "",
     email: "",
     phone: "",
-    city: "",
+    venue: "",
     guests: "",
     notes: "",
   });
@@ -74,51 +86,58 @@ function BookingPage() {
     setErrors((prev) => ({ ...prev, [key]: undefined }));
   };
 
-  function validate(): Errors {
-    const next: Errors = {};
-    if (!date) next.date = "Select a preferred date for your first function.";
-    if (form.name.trim().length < 2) next.name = "Enter the name we should address you by.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()))
-      next.email = "Enter a valid email address.";
-    if (form.phone.replace(/\D/g, "").length < 10) next.phone = "Enter a 10-digit phone number.";
-    if (form.city.trim().length < 2) next.city = "Where is the celebration taking place?";
-    const guests = Number(form.guests);
-    if (!form.guests || Number.isNaN(guests) || guests < 20 || guests > 2000)
-      next.guests = "Enter an approximate guest count between 20 and 2000.";
-    return next;
-  }
-
   async function onSubmit(event: React.FormEvent) {
     event.preventDefault();
-    const found = validate();
-    setErrors(found);
-    if (Object.keys(found).length > 0) {
+    if (status === "submitting") return;
+
+    const payload = {
+      clientName: form.name,
+      partnerName: form.partner,
+      email: form.email,
+      phone: form.phone,
+      eventType,
+      eventDate: date ? format(date, "yyyy-MM-dd") : "",
+      preferredTime,
+      guestCount: form.guests.trim() === "" ? Number.NaN : Number(form.guests),
+      venue: form.venue,
+      budget,
+      message: form.notes,
+    };
+
+    const parsed = bookingRequestSchema.safeParse(payload);
+    if (!parsed.success) {
+      const fields = parsed.error.flatten().fieldErrors;
+      const next: Errors = {
+        date: fields.eventDate?.[0] ?? (date ? undefined : "Select a preferred date."),
+        name: fields.clientName?.[0],
+        partner: fields.partnerName?.[0],
+        email: fields.email?.[0],
+        phone: fields.phone?.[0],
+        venue: fields.venue?.[0],
+        guests: fields.guestCount?.[0],
+      };
+      setErrors(next);
       document.querySelector<HTMLElement>("[data-invalid='true']")?.focus();
       return;
     }
+
+    setErrors({});
     setStatus("submitting");
     setFailure(null);
     try {
-      const booking = await createBooking({
-        name: form.name.trim(),
-        email: form.email.trim(),
-        phone: form.phone.trim(),
-        city: form.city.trim(),
-        eventType,
-        eventDate: format(date!, "yyyy-MM-dd"),
-        guests: Number(form.guests),
-        budget,
-        notes: form.notes.trim() || undefined,
-      });
-      setReference(booking.id);
+      const result = await submitRequest({ data: parsed.data });
+      setReference(result.reference);
       setStatus("success");
-      toast.success("Booking request sent", {
-        description: `Reference ${booking.id}. A founder replies within two working days.`,
+      toast.success("Booking request received.", {
+        description: `Reference ${result.reference}. We reply within two working days.`,
         icon: <Check className="size-4" />,
       });
     } catch (err) {
       setStatus("error");
-      const message = err instanceof Error ? err.message : "Something went wrong.";
+      const message =
+        err instanceof Error && err.message.length < 120
+          ? err.message
+          : "We couldn't send your request. Please try again.";
       setFailure(message);
       toast.error("We couldn't send your request", {
         description: message,
