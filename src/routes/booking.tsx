@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { format } from "date-fns";
 import { ArrowRight, CalendarDays, Check, Loader2, TriangleAlert } from "lucide-react";
@@ -13,13 +15,15 @@ import { Reveal } from "@/components/site/Reveal";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { cn } from "@/lib/utils";
+import { listUnavailableDates, submitBookingRequest } from "@/lib/bookings.functions";
 import {
   BUDGET_BANDS,
   EVENT_TYPES,
-  createBooking,
-  getUnavailableDates,
+  PREFERRED_TIMES,
+  bookingRequestSchema,
   type EventType,
-} from "@/lib/bookings";
+  type PreferredTime,
+} from "@/lib/booking-schema";
 
 const TITLE = "Request a Date — Stepwise Events";
 const DESCRIPTION =
