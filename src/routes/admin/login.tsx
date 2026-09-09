@@ -4,6 +4,7 @@ import { Eye, EyeOff, Loader2, LogIn, TriangleAlert } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 
+import logo from "@/assets/stepwise-logo.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -87,8 +88,14 @@ function AdminLoginPage() {
     <main className="grid min-h-screen place-items-center bg-secondary/35 px-5 py-12">
       <div className="animate-in w-full max-w-sm">
         <div className="text-center">
-          <p className="eyebrow">Stepwise Events</p>
-          <h1 className="mt-3 font-display text-3xl">Admin Portal</h1>
+          <img
+            src={logo.url}
+            alt="Stepwise Events — Weddings and Celebrations"
+            width={1586}
+            height={782}
+            className="mx-auto h-16 w-auto max-w-[220px] object-contain"
+          />
+          <h1 className="mt-4 font-display text-3xl">Admin Portal</h1>
         </div>
 
         <form

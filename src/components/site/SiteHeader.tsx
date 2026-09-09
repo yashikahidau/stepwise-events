@@ -3,6 +3,8 @@ import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/stepwise-logo.png.asset.json";
+import monogram from "@/assets/stepwise-monogram.png.asset.json";
 
 const SECTIONS = [
   { label: "Services", href: "/#services" },
@@ -39,20 +41,23 @@ export function SiteHeader() {
         <Link
           to="/"
           onClick={() => setOpen(false)}
-          className="group flex min-w-0 items-center gap-3"
+          className="group flex min-w-0 items-center"
           aria-label="Stepwise Events home"
         >
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-sm bg-primary font-display text-base leading-none text-primary-foreground">
-            SE
-          </span>
-          <span className="min-w-0">
-            <span className="block truncate font-display text-lg leading-none">
-              Stepwise Events
-            </span>
-            <span className="mt-1 block text-[0.625rem] tracking-[0.2em] text-muted-foreground uppercase">
-              Weddings &amp; Celebrations
-            </span>
-          </span>
+          <img
+            src={monogram.url}
+            alt="Stepwise Events"
+            width={620}
+            height={493}
+            className="h-9 w-auto shrink-0 object-contain min-[420px]:hidden"
+          />
+          <img
+            src={logo.url}
+            alt="Stepwise Events — Weddings and Celebrations"
+            width={1586}
+            height={782}
+            className="hidden h-11 w-auto max-w-full object-contain object-left min-[420px]:block lg:h-14"
+          />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">

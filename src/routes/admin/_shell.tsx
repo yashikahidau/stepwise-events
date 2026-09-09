@@ -10,6 +10,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { LogOut } from "lucide-react";
 import { toast } from "sonner";
 
+import monogram from "@/assets/stepwise-monogram.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -50,11 +51,22 @@ function AdminShell() {
     <div className="min-h-screen bg-secondary/35">
       <header className="border-b border-border bg-primary text-primary-foreground">
         <div className="shell grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-4">
-          <Link to="/admin" className="min-w-0">
-            <p className="text-[0.625rem] tracking-[0.22em] text-primary-foreground/60 uppercase">
-              Stepwise Events
-            </p>
-            <h1 className="truncate font-display text-xl leading-tight">Booking Requests</h1>
+          <Link to="/admin" className="flex min-w-0 items-center gap-3">
+            <span className="grid size-10 shrink-0 place-items-center rounded-sm bg-white p-1.5">
+              <img
+                src={monogram.url}
+                alt="Stepwise Events"
+                width={620}
+                height={493}
+                className="h-full w-full object-contain"
+              />
+            </span>
+            <span className="min-w-0">
+              <span className="block text-[0.625rem] tracking-[0.22em] text-primary-foreground/60 uppercase">
+                Stepwise Events
+              </span>
+              <h1 className="truncate font-display text-xl leading-tight">Booking Requests</h1>
+            </span>
           </Link>
           <Button
             variant="ghost"
