@@ -9,7 +9,9 @@
  * the database row-level policies enforce the same rule independently.
  */
 import { createServerFn } from "@tanstack/react-start";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import type { Database } from "@/integrations/supabase/types";
 
 import {
   bookingIdSchema,
@@ -69,7 +71,7 @@ function toDetail(row: BookingRow): BookingDetail {
 }
 
 /** Throws a safe error unless the caller holds the ADMIN role. */
-async function assertAdmin(supabase: { rpc: (fn: string, args: Record<string, unknown>) => Promise<{ data: unknown; error: unknown }> }, userId: string) {
+async function assertAdmin(supabase: SupabaseClient<Database>, userId: string) {
   const { data, error } = await supabase.rpc("has_role", { _user_id: userId, _role: "admin" });
   if (error || data !== true) {
     throw new Error("FORBIDDEN");
