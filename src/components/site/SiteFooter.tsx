@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone } from "lucide-react";
 
+import logo from "@/assets/stepwise-logo.png.asset.json";
+
 export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-secondary/50">
