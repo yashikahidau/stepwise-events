@@ -10,6 +10,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { LogOut } from "lucide-react";
 import { toast } from "sonner";
 
+import monogram from "@/assets/stepwise-monogram.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 
