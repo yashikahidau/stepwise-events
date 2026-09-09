@@ -3,6 +3,8 @@ import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/stepwise-logo.png.asset.json";
+import monogram from "@/assets/stepwise-monogram.png.asset.json";
 
 const SECTIONS = [
   { label: "Services", href: "/#services" },
