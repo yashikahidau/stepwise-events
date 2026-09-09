@@ -4,6 +4,7 @@ import { Eye, EyeOff, Loader2, LogIn, TriangleAlert } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 
+import logo from "@/assets/stepwise-logo.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
