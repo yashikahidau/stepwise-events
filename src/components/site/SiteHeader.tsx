@@ -49,14 +49,14 @@ export function SiteHeader() {
             alt="Stepwise Events"
             width={620}
             height={493}
-            className="h-9 w-auto shrink-0 object-contain min-[420px]:hidden"
+            className="h-9 w-auto shrink-0 object-contain min-[360px]:hidden"
           />
           <img
             src={logo.url}
             alt="Stepwise Events — Weddings and Celebrations"
             width={1586}
             height={782}
-            className="hidden h-12 w-auto max-w-full object-contain object-left min-[420px]:block lg:h-16"
+            className="hidden h-12 w-auto max-w-full object-contain object-left min-[360px]:block lg:h-16"
           />
         </Link>
 
