@@ -56,7 +56,7 @@ export function SiteHeader() {
             alt="Stepwise Events — Weddings and Celebrations"
             width={1586}
             height={782}
-            className="hidden h-11 w-auto max-w-full object-contain object-left min-[420px]:block lg:h-14"
+            className="hidden h-12 w-auto max-w-full object-contain object-left min-[420px]:block lg:h-16"
           />
         </Link>
 
