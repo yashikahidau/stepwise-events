@@ -3,8 +3,6 @@ import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/stepwise-logo.png.asset.json";
-import monogram from "@/assets/stepwise-monogram.png.asset.json";
 
 const SECTIONS = [
   { label: "Services", href: "/#services" },
@@ -45,14 +43,14 @@ export function SiteHeader() {
           aria-label="Stepwise Events home"
         >
           <img
-            src={monogram.url}
+            src="/stepwise-monogram.png"
             alt="Stepwise Events"
             width={620}
             height={493}
             className="h-9 w-auto shrink-0 object-contain min-[360px]:hidden"
           />
           <img
-            src={logo.url}
+            src="/stepwise-logo.png"
             alt="Stepwise Events — Weddings and Celebrations"
             width={1586}
             height={782}
