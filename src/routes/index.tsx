@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
-import heroVenue from "@/assets/hero-venue.png.asset.json";
+
 import galleryTablescape from "@/assets/gallery-tablescape.jpg";
 import galleryHaldi from "@/assets/gallery-haldi.jpg";
 import galleryVenue from "@/assets/gallery-venue.jpg";
@@ -154,10 +154,9 @@ function Home() {
               </dl>
             </Reveal>
 
-
             <Reveal delay={120} className="media-frame rounded-lg">
               <img
-                src={heroVenue.url}
+                src="/hero-venue.png"
                 width={1536}
                 height={1024}
                 alt="Candlelit outdoor wedding reception venue set with florals and warm lighting"
@@ -294,114 +293,4 @@ function Home() {
               <h2 className="mt-4 text-3xl sm:text-4xl">How a booking moves forward</h2>
             </Reveal>
             <ol className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border lg:mt-16 lg:grid-cols-4">
-              {PROCESS.map((item, i) => (
-                <Reveal
-                  as="li"
-                  key={item.step}
-                  delay={i * 70}
-                  className="bg-card p-6 lg:p-7"
-                >
-                  <span className="font-display text-3xl text-accent">{item.step}</span>
-                  <h3 className="mt-4 text-lg">{item.title}</h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
-                    {item.body}
-                  </p>
-                </Reveal>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        {/* Studio */}
-        <section id="studio" className="section-y scroll-mt-20 bg-secondary/45">
-          <div className="shell grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            <Reveal className="media-frame order-last rounded-lg lg:order-first">
-              <img
-                src={aboutStudio}
-                loading="lazy"
-                width={1312}
-                height={1008}
-                alt="Two Stepwise Events planners reviewing a floor plan with fabric swatches and brass details on a studio table"
-                className="aspect-4/3"
-              />
-            </Reveal>
-            <Reveal delay={100} className="rule-accent">
-              <p className="eyebrow">The studio</p>
-              <h2 className="mt-4 text-3xl sm:text-4xl">
-                A small team, deliberately kept that way
-              </h2>
-              <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                <p>
-                  Stepwise Events is a planning and design studio built around a small core team,
-                  with backgrounds in banqueting and production design.
-                </p>
-                <p>
-                  We work with a fixed roster of florists, fabricators and caterers, which is how
-                  we can quote accurately and hold to it.
-                </p>
-                <p>Every enquiry is answered by a planner, not a sales desk.</p>
-
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* Testimonials */}
-        <section className="section-y">
-          <div className="shell">
-            <Reveal className="measure rule-accent">
-              <p className="eyebrow">Clients</p>
-              <h2 className="mt-4 text-3xl sm:text-4xl">In their words</h2>
-            </Reveal>
-            <div className="mt-12 grid gap-5 md:grid-cols-3 lg:mt-16">
-              {TESTIMONIALS.map((t, i) => (
-                <Reveal
-                  key={t.name}
-                  delay={i * 70}
-                  className="hover-lift flex flex-col rounded-lg border border-border bg-card p-6 lg:p-7"
-                >
-                  <Quote className="size-5 text-accent" aria-hidden="true" />
-                  <blockquote className="mt-5 flex-1 text-sm leading-relaxed sm:text-[0.9375rem]">
-                    {t.quote}
-                  </blockquote>
-                  <footer className="mt-6 border-t border-border pt-4">
-                    <p className="text-sm font-semibold">{t.name}</p>
-                    <p className="mt-0.5 text-xs tracking-wide text-muted-foreground uppercase">
-                      {t.place}
-                    </p>
-                  </footer>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Booking CTA */}
-        <section className="pb-20 lg:pb-28">
-          <div className="shell">
-            <Reveal className="rounded-lg bg-primary px-6 py-14 text-center text-primary-foreground sm:px-10 lg:px-16 lg:py-20">
-              <p className="text-[0.6875rem] font-semibold tracking-[0.22em] text-primary-foreground/70 uppercase">
-                Dates for 2026–27
-              </p>
-              <h2 className="mx-auto mt-5 max-w-2xl text-3xl sm:text-4xl lg:text-5xl">
-                Check whether your dates are still open
-              </h2>
-              <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-primary-foreground/75 sm:text-base">
-                Send us your functions and guest count. You'll hear back from a planner within two
-                working days.
-              </p>
-              <div className="mt-9 flex justify-center">
-                <Button asChild size="lg" variant="accent">
-                  <Link to="/booking">
-                    Request a date <ArrowRight className="size-4" />
-                  </Link>
-                </Button>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-      </main>
-      <SiteFooter />
-    </div>
-  );
-}
+              {PROCESS.map((item
